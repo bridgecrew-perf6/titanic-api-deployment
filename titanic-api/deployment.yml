@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: titanic-api
+  labels:
+    tier: backend
+    layer: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: backend
+      layer: api
+  template:
+    metadata:
+      labels:
+        tier: backend
+        layer: api
+    spec:
+      containers:
+        - name: api
+          image: chriscmsoft/titanic-api:0.0.4
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              cpu: 0.1
+              memory: 100Mi
+            limits:
+              cpu: 1
+              memory: 200Mi
